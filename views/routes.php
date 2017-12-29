@@ -4,7 +4,8 @@ class Route {
     private $_controller;
     private $_action;
 
-    private $_controllers = array('pages' => ['home', 'error']);
+    private $_controllers = array('pages' => ['home', 'error'],
+                                  'users' => ['connection']);
 
     private $_page;
 
@@ -26,6 +27,9 @@ class Route {
         switch($this->_controller) {
             case 'pages':
                 $this->_page = new PagesController($this->_action);
+                break;
+            case 'users':
+                $this->_page = new UsersController($this->_action);
                 break;
         }
     
