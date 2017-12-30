@@ -3,7 +3,7 @@
         <div class="field">
             <label class="label">Pseudo</label>
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="text" placeholder="Pseudo" required>
+                <input name="pseudo" class="input" type="text" placeholder="Pseudo" required>
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -13,7 +13,7 @@
         <div class="field">
         <label class="label">Mot de passe</label>
             <p class="control is-expanded has-icons-left">
-                <input class="input" type="password" placeholder="Mot de passe" required>
+                <input name="pass" class="input" type="password" placeholder="Mot de passe" required>
                 <span class="icon is-small is-left">
                     <i class="fa fa-unlock-alt"></i>
                 </span>

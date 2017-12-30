@@ -5,7 +5,8 @@ class Route {
     private $_action;
 
     private $_controllers = array('pages' => ['home', 'error'],
-                                  'users' => ['connection']);
+                                  'users' => ['connection', 'inscription'],
+                                  'monsters' => ['add']);
 
     private $_page;
 
@@ -30,6 +31,9 @@ class Route {
                 break;
             case 'users':
                 $this->_page = new UsersController($this->_action);
+                break;
+            case 'monsters':
+                $this->_page = new MonstersController($this->_action);
                 break;
         }
     
