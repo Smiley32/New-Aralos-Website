@@ -3,8 +3,8 @@
 class Users {
     public static function add($pseudo, $password, $mail = NULL, $bestMonster = NULL) {
         $db = Db::getInstance();
-        // Vérification de l'existence de cet utilisateur
 
+        // Vérification de l'existence de cet utilisateur
         $req = $db->prepare('SELECT u_pseudo FROM users WHERE u_pseudo=:u_pseudo');
         $req->execute(array('u_pseudo' => $pseudo));
 
@@ -15,7 +15,11 @@ class Users {
 
         // Si le monstre est choisi, on vérifie qu'il existe
         if($bestMonster != NULL) {
-            // Monsters::isIn($bestMonster);
+            require_once('models/monsters.php');
+            $monster = Monsters::getById($bestMonster);
+            if(isset($monster['m_id'])) {
+                return false; // Le monstre existe déjà
+            }
         }
 
         // Hachage du mot de passe
@@ -28,6 +32,15 @@ class Users {
                                     'u_mail' => $mail));
         
         return $ret;
+    }
+
+    public static function getById($id) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT u_pseudo FROM users WHERE u_pseudo=:u_pseudo');
+        $ret = $req->execute(array('u_pseudo' => $pseudo));
+
+        return !$ret ? false : $req->fetch();
     }
 }
 
