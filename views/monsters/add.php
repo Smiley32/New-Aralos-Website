@@ -10,12 +10,24 @@
     </article>
 <?php }} ?>
 
+<?php if($succes) { ?>
+    <article class="message is-success">
+        <div class="message-header">
+            <p>Success</p>
+            <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+            Le monstre a été ajouté correctement !
+        </div>
+    </article>
+<?php } ?>
+
 <form method="POST" enctype="multipart/form-data">
     <div class="field-body">
         <div class="field">
             <label class="label">Nom propre du monstre</label>
             <p class="control is-expanded has-icons-left">
-                <input name="name" class="input" type="text" placeholder="Galion" value="<?php echo $_POST['name']; ?>" required>
+                <input name="name" class="input" type="text" placeholder="Galion" value="<?php if($post) echo $_POST['name']; ?>" required>
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -25,7 +37,7 @@
         <div class="field">
             <label class="label">Nom anglais (facultatif)</label>
             <p class="control is-expanded has-icons-left">
-                <input name="englishName" class="input" type="text" placeholder="Galleon" value="<?php echo $_POST['englishName']; ?>">
+                <input name="englishName" class="input" type="text" placeholder="Galleon" value="<?php if($post) echo $_POST['englishName']; ?>">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -72,8 +84,9 @@
             <span class="select">
                 <select name="family">
                     <option value="nothing" selected>Choisir une famille</option>
-                    <option value="id">Amazones</option>
-                    <option value="id">Pirates</option>
+                    <?php foreach($families as $family) { ?>
+                        <option value="<?php echo $family['fa_id']; ?>"><?php echo $family['fa_name']; ?></option>
+                    <?php } ?>
                     <option value="ajout">Ajouter une famille</option>
                 </select>
             </span>
@@ -83,7 +96,7 @@
     <div class="field">
         <label class="label">Création d'une famille</label>
         <p class="control is-expanded has-icons-left">
-            <input name="familyName" class="input" type="text" placeholder="Amazones" value="<?php echo $_POST['familyName']; ?>">
+            <input name="familyName" class="input" type="text" placeholder="Amazones" value="<?php if($post) echo $_POST['familyName']; ?>">
             <span class="icon is-small is-left">
                 <i class="fa fa-users"></i>
             </span>
@@ -113,7 +126,7 @@
     <div class="field">
         <label class="label">Courte description du monstre</label>
         <p class="control is-expanded">
-            <textarea name="shortDesc" class="textarea" placeholder="Écrivez ici une courte description du monstre"><?php echo $_POST['shortDesc']; ?></textarea>
+            <textarea name="shortDesc" class="textarea" placeholder="Écrivez ici une courte description du monstre"><?php if($post) echo $_POST['shortDesc']; ?></textarea>
         </p>
     </div>
     <br>

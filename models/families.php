@@ -34,6 +34,15 @@ class Families {
 
         return !$ret ? false : $req->fetch();
     }
+
+    public static function getAll() {
+        $db = Db::getInstance();
+        
+        $req = $db->prepare('SELECT * FROM families');
+        $ret = $req->execute();
+
+        return !$ret ? false : $req->fetchAll();
+    }
 }
 
 ?>

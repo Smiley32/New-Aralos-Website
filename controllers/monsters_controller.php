@@ -4,8 +4,15 @@ class MonstersController extends Controller {
     protected function add() {
         $this->title = "Ajout d'un monstre";
 
+        // Sélection des familles
+        require_once('models/families.php');
+        $families = Families::getAll();
+
         $error = false;
+        $post = false;
+        $succes = false;
         if(isset($_POST['submit'])) {
+            $post = true;
             // Le formulaire a été soumis, on va vérifier les informations
 
             // Erreurs
@@ -31,9 +38,7 @@ class MonstersController extends Controller {
                 $errors[] = "La description ne doit pas dépasser 500 caractères";
             }
 
-            $allTypes = array('Vent', 'Feu', 'Eau', 'Lumière', 'Ténèbre');
-
-            if(!array_key_exists($_POST['type'], $allTypes)) {
+            if(!is_numeric($_POST['type']) || $_POST['type'] < 1 || $_POST['type'] > 5) {
                 $error = true;
                 $errors[] = "Une valeur incorrecte de type a été choisie";
             }
@@ -108,6 +113,9 @@ class MonstersController extends Controller {
                                 if($ret == false) {
                                     $error = true;
                                     $errors[] = "L'ajout du monstre a échoué";
+                                } else {
+                                    $succes = true;
+                                    $post = false;
                                 }
                             }
                         }
