@@ -1,6 +1,17 @@
 <?php
 
 class MonstersController extends Controller {
+    protected function ajax() {
+        $this->type = 'plain';
+        if(isset($_GET['search'])) {
+            require_once('models/families.php');
+            $families = Families::getLikeName($_GET['search']);
+            if($families !== false) {
+                require_once('views/monsters/' . $this->_action . '.php');
+            }
+        }
+    }
+
     protected function add() {
         $this->title = "Ajout d'un monstre";
 

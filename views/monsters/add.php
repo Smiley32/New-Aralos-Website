@@ -96,10 +96,13 @@
     <div class="field">
         <label class="label">Création d'une famille</label>
         <p class="control is-expanded has-icons-left">
-            <input name="familyName" class="input" type="text" placeholder="Amazones" value="<?php if($post) echo $_POST['familyName']; ?>">
+            <input id="toChange" autocomplete="off" name="familyName" class="input" type="text" oninput="searchFamily(this)" placeholder="Amazones" value="<?php if($post) echo $_POST['familyName']; ?>">
             <span class="icon is-small is-left">
                 <i class="fa fa-users"></i>
             </span>
+            <div class="dropdown-content" id="dropdown" style="display: none;">
+                
+            </div>
         </p>
     </div>
 
@@ -152,6 +155,31 @@ function changeName() {
         }
 
         document.getElementById('fileName').innerHTML = filename;
+    }
+}
+
+function change(txt) {
+    document.getElementById("toChange").value = txt;
+    document.getElementById("dropdown").style.display = "none";
+    document.getElementById("dropdown").innerHTML = "";
+}
+
+function searchFamily(element) {
+    var txt = element.value;
+    if(txt.length > 2) {
+        txt = encodeURIComponent(txt);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(xhttp.readyState == 4 && (xhttp.status == 200 || xhttp.status == 0)) {
+                console.log("reçu : " + xhttp.responseText);
+                document.getElementById("dropdown").innerHTML = xhttp.responseText;
+                document.getElementById("dropdown").style.display = "block";
+            }
+        };
+
+        console.log(txt);
+        xhttp.open("GET", "/monsters/ajax?search=" + txt, true);
+        xhttp.send();
     }
 }
 

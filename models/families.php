@@ -35,6 +35,17 @@ class Families {
         return !$ret ? false : $req->fetch();
     }
 
+    public static function getLikeName($name) {
+        $db = Db::getInstance();
+
+        $name = "%$name%";
+
+        $req = $db->prepare('SELECT * FROM families WHERE fa_name LIKE :fa_name');
+        $ret = $req->execute(array('fa_name' => $name));
+
+        return !$ret ? false : $req->fetchAll();
+    }
+
     public static function getAll() {
         $db = Db::getInstance();
         

@@ -4,7 +4,7 @@ class Controller {
     protected $_action;
 
     public $title = 'Default Title';
-    // Others params ?
+    public $type = 'html';
 
     public $body = 'empty...';
 

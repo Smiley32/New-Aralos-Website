@@ -6,7 +6,7 @@ class Route {
 
     private $_controllers = array('pages' => ['home', 'error'],
                                   'users' => ['connection', 'inscription'],
-                                  'monsters' => ['add']);
+                                  'monsters' => ['add', 'ajax']);
 
     private $_page;
 
@@ -43,14 +43,19 @@ class Route {
         // We don't want to write right now
         ob_start();
         $this->_page->call();
-        // $this->_page->{ $this->_action }();
     }
 
     public function display() {
-        $title = $this->_page->title;
-        $body = $this->_page->body;
+        if($this->_page->type == 'html') {
+            $title = $this->_page->title;
+            $body = $this->_page->body;
 
-        require_once('views/layout.php');
+            require_once('views/layout.php');
+        } else {
+            header("Content-Type: text/plain");
+            
+            echo $this->_page->body;
+        }
     }
 }
 
