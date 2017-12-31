@@ -15,10 +15,6 @@ class MonstersController extends Controller {
     protected function add() {
         $this->title = "Ajout d'un monstre";
 
-        // Sélection des familles
-        require_once('models/families.php');
-        $families = Families::getAll();
-
         $error = false;
         $post = false;
         $succes = false;
@@ -54,14 +50,6 @@ class MonstersController extends Controller {
                 $errors[] = "Une valeur incorrecte de type a été choisie";
             }
 
-            if($_POST['family'] == 'nothing') {
-                $error = true;
-                $errors[] = "Vous devez choisir une famille ou bien en créer une";
-            } elseif($_POST['family'] != 'ajout' && !is_numeric($_POST['family'])) {
-                $error = true;
-                $errors[] = "Une valeur incorrecte de famille a été choisie";
-            }
-
             if(!isset($_FILES['file']['name'])) {
                 $error = true;
                 $errors[] = "Vous devez choisir un icone";
@@ -87,17 +75,15 @@ class MonstersController extends Controller {
                             // Enfin, on suppose que l'image est correcte
 
                             // Vérifions donc les familles
-                            if($_POST['family'] != 'ajout') {
-                                $familyId = $_POST['family'];
+                            if(strlen($_POST['familyName']) > 30) {
+                                $error = true;
+                                $errors[] = "Le nom de la famille est trop long";
                             } else {
-                                // On veut ajouter une famille
                                 require_once('models/families.php');
-                                if(strlen($_POST['familyName']) > 30) {
-                                    $error = true;
-                                    $errors[] = "Le nom de la famille est trop long";
-                                } else {
-                                    $familyId = Families::add($_POST['familyName']);
-                                }
+
+                                // On regarde si la famille existe
+                                $fam = Families::getByName($_POST['familyName']);
+                                $familyId = isset($fam['fa_id']) ? $fam['fa_id'] : Families::add($_POST['familyName']);
                             }
 
                             if($familyId == false) {

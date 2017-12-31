@@ -79,22 +79,7 @@
     </div>
 
     <div class="field">
-        <label class="label">Famille</label>
-        <p class="control">
-            <span class="select">
-                <select name="family">
-                    <option value="nothing" selected>Choisir une famille</option>
-                    <?php foreach($families as $family) { ?>
-                        <option value="<?php echo $family['fa_id']; ?>"><?php echo $family['fa_name']; ?></option>
-                    <?php } ?>
-                    <option value="ajout">Ajouter une famille</option>
-                </select>
-            </span>
-        </p>
-    </div>
-
-    <div class="field">
-        <label class="label">Création d'une famille</label>
+        <label class="label">Chosir une famille (elle sera créée si elle n'exsite pas)</label>
         <p class="control is-expanded has-icons-left">
             <input id="toChange" autocomplete="off" name="familyName" class="input" type="text" oninput="searchFamily(this)" placeholder="Amazones" value="<?php if($post) echo $_POST['familyName']; ?>">
             <span class="icon is-small is-left">
