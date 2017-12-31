@@ -40,3 +40,18 @@ CREATE TABLE users (
     PRIMARY KEY (u_id),
     FOREIGN KEY (u_bestMonster) REFERENCES monsters(m_id)
 );
+
+CREATE TABLE guild (
+    g_id INT NOT NULL AUTO_INCREMENT,
+    g_mdp VARCHAR(10) NOT NULL,
+    g_name VARCHAR(30) NOT NULL,
+    PRIMARY KEY (g_id)
+);
+
+CREATE TABLE user_guild (
+    ug_user INT NOT NULL,
+    ug_guild INT NOT NULL,
+    PRIMARY KEY (ug_user),
+    FOREIGN KEY (ug_user) REFERENCES users(u_id),
+    FOREIGN KEY (ug_guild) REFERENCES guild(g_id)
+);

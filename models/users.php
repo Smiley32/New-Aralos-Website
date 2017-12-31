@@ -31,7 +31,7 @@ class Users {
                                     'u_bestMonster' => $bestMonster,
                                     'u_mail' => $mail));
         
-        return $ret;
+        return !$ret ? false : $db->lastInsertId();
     }
 
     public static function getById($id) {
