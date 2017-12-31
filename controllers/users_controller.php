@@ -48,7 +48,7 @@ class UsersController extends Controller {
                 $mail = NULL;
             }
 
-            if(isset($_POST['guildKey']) && strlen($_POST['guildKey']) == 0) {
+            if(isset($_POST['guildKey']) && strlen($_POST['guildKey']) > 0) {
                 if(!is_numeric($_POST['guildId'])) {
                     $error = true;
                     $errors[] = "Guilde incorrecte";
