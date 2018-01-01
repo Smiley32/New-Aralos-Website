@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $title; ?></title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,16 +36,34 @@
                         <a class="navbar-item" href="/plus/site">Le site</a>
                     </div>
                 </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <a class="icon" onclick="showLogin()"><i class="fa fa-user fa-2x"></i></a>
+                    </div>
+                </div>
             </div>
         </nav>
 
         <div class="container">
+            <div class="coMenu">
+                <?php echo $coMenu; ?>
+            </div>
+
             <?php echo $body; ?>
         </div>
 
         <script>
+
+function showLogin() {
+    if(document.getElementsByClassName("coMenu")[0].style.display == "none") {
+        document.getElementsByClassName("coMenu")[0].style.display = "block";
+    } else {
+        document.getElementsByClassName("coMenu")[0].style.display = "none";
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-    
+
     // Get all "navbar-burger" elements
     var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 

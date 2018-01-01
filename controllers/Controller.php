@@ -13,7 +13,7 @@ class Controller {
     }
 
     public function call() {
-        ob_end_clean(); // Should be useless
+        // ob_end_clean(); // Should be useless
         // We don't want to write right now
         ob_start();
 
