@@ -72,21 +72,21 @@
                     <option value="3">Feu</option>
                     <option value="2">Eau</option>
                     <option value="4">Lumière</option>
-                    <option value="5">Ténèbre</option>
+                    <option value="5">Ténèbres</option>
                 </select>
             </span>
         </p>
     </div>
 
     <div class="field">
-        <label class="label">Chosir une famille (elle sera créée si elle n'exsite pas)</label>
+        <label class="label">Choisir une famille (elle sera créée si elle n'exsite pas)</label>
         <p class="control is-expanded has-icons-left">
             <input id="toChange" autocomplete="off" name="familyName" class="input" type="text" oninput="searchFamily(this)" placeholder="Amazones" value="<?php if($post) echo $_POST['familyName']; ?>">
             <span class="icon is-small is-left">
                 <i class="fa fa-users"></i>
             </span>
             <div class="dropdown-content" id="dropdown" style="display: none;">
-                
+
             </div>
         </p>
     </div>

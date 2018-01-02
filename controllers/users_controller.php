@@ -1,8 +1,89 @@
 <?php
 
 class UsersController extends Controller {
+    protected function menu() {
+        if(!isConnected()) {
+            $_SESSION['message'] = 'Vous n\'êtes pas connecté';
+            $_SESSION['messageType'] = 'error';
+
+            redirect('pages', 'home');
+        }
+
+        require_once('views/users/' . $this->_action . '.php');
+    }
+
+    protected function deconnection() {
+        if(!isConnected()) {
+            $_SESSION['message'] = 'Vous n\'êtes pas connecté';
+            $_SESSION['messageType'] = 'error';
+
+            redirect('pages', 'home');
+        }
+
+        unset($_SESSION['id']);
+        unset($_SESSION['pseudo']);
+
+        $_SESSION['message'] = 'Vous vous êtes correctement déconnecté';
+        $_SESSION['messageType'] = 'success';
+
+        redirect('pages', 'home');
+    }
+
     protected function connection() {
+        if(isConnected()) {
+            // Redirection vers l'accueil
+            $_SESSION['message'] = 'Vous êtes déjà connecté';
+            $_SESSION['messageType'] = 'error';
+
+            redirect('pages', 'home');
+        }
+
         $this->title = "Connexion";
+
+        $error = false;
+
+        if(isset($_POST['submit'])) {
+            if(strlen($_POST['pseudo']) > 30) {
+                $error = true;
+                $errors[] = "Le pseudo est trop long";
+            }
+
+            if(strlen($_POST['pseudo']) == 0) {
+                $error = true;
+                $errors[] = "Il faut entrer un pseudo";
+            }
+
+            if(strlen($_POST['pass']) == 0) {
+                $error = true;
+                $errors[] = "Il faut entrer un mot de passe";
+            }
+
+            if(!$error) {
+                // On va chercher l'utilisateur dans la bdd
+                require_once('models/users.php');
+
+                $user = Users::getByName($_POST['pseudo']);
+                if($user == false) {
+                    $error = true;
+                    $errors[] = "Impossible de trouver l'utilisateur";
+                } else {
+                    // Vérification du mot de passe
+                    if(password_verify($_POST['pass'], $user['u_hash'])) {
+                        $_SESSION['id'] = $user['u_id'];
+                        $_SESSION['pseudo'] = $user['u_pseudo'];
+
+                        // Redirection vers l'accueil
+                        $_SESSION['message'] = 'Vous êtes maintenant connecté !';
+                        $_SESSION['messageType'] = 'success';
+
+                        redirect('pages', 'home');
+                    } else {
+                        $error = true;
+                        $errors[] = "Le mot de passe est incorrect";
+                    }
+                }
+            }
+        }
 
         require_once('views/users/' . $this->_action . '.php');
     }

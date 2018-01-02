@@ -50,7 +50,7 @@ class MonstersController extends Controller {
                 $errors[] = "Une valeur incorrecte de type a été choisie";
             }
 
-            if(!isset($_FILES['file']['name'])) {
+            if(!isset($_FILES['file']['name']) || strlen($_FILES['file']['name']) == 0) {
                 $error = true;
                 $errors[] = "Vous devez choisir un icone";
             }
@@ -94,8 +94,8 @@ class MonstersController extends Controller {
                             if(!move_uploaded_file($_FILES["file"]["tmp_name"], $targetFile)) {
                                 $error = true;
                                 $errors[] = "Le fichier n'a pas été uploadé correctement";
-                            } 
-                            
+                            }
+
                             if(!$error) {
                                 require_once('models/monsters.php');
 
@@ -104,7 +104,7 @@ class MonstersController extends Controller {
                                 } else {
                                     $englishName = NULL;
                                 }
-                                
+
                                 $ret = Monsters::add($_POST['name'], $_POST['stars'], $_POST['shortDesc'], $targetFile, $familyId, $_POST['type'], $englishName);
 
                                 if($ret == false) {

@@ -15,6 +15,19 @@ if(isset($_GET['controller'], $_GET['action'])) {
     $action = 'home';
 }
 
+/// Fonction de vérification de connection
+function isConnected() {
+    return isset($_SESSION['id']);
+}
+
+/// Fonction de redirection
+function redirect($controller, $action) {
+    header('Location: /' . $controller . '/' . $action);
+    die();
+}
+
+session_start();
+
 require_once('views/routes.php');
 $routes = new Route($controller, $action);
 $routes->call();

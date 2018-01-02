@@ -5,7 +5,7 @@ class Route {
     private $_action;
 
     private $_controllers = array('pages' => ['home', 'error'],
-                                  'users' => ['connection', 'inscription'],
+                                  'users' => ['connection', 'inscription', 'deconnection', 'menu'],
                                   'monsters' => ['add', 'ajax']);
 
     private $_page;
@@ -51,9 +51,15 @@ class Route {
             $body = $this->_page->body;
 
             // On récupère le menu
-            $r = new Route('users', 'connection');
-            $r->call();
-            $coMenu = $r->getBody();
+            if(!isConnected()) {
+                $r = new Route('users', 'connection');
+                $r->call();
+                $coMenu = $r->getBody();
+            } else {
+                $r = new Route('users', 'menu');
+                $r->call();
+                $coMenu = $r->getBody();
+            }
 
             require_once('views/layout.php');
         } else {

@@ -74,7 +74,7 @@
         <div class="field">
             <label class="label">Clé d'inscription (donnée par la guilde)</label>
             <p class="control is-expanded has-icons-left">
-                <input name="guildKey" class="input" type="text" placeholder="Clé d'inscription" required>
+                <input name="guildKey" class="input" type="text" placeholder="Clé d'inscription">
                 <span class="icon is-small is-left">
                     <i class="fa fa-unlock-alt"></i>
                 </span>

@@ -30,14 +30,14 @@ class Users {
                                     'u_hash' => $hash,
                                     'u_bestMonster' => $bestMonster,
                                     'u_mail' => $mail));
-        
+
         return !$ret ? false : $db->lastInsertId();
     }
 
-    public static function getById($id) {
+    public static function getByName($pseudo) {
         $db = Db::getInstance();
 
-        $req = $db->prepare('SELECT u_pseudo FROM users WHERE u_pseudo=:u_pseudo');
+        $req = $db->prepare('SELECT * FROM users WHERE u_pseudo=:u_pseudo');
         $ret = $req->execute(array('u_pseudo' => $pseudo));
 
         return !$ret ? false : $req->fetch();

@@ -1,9 +1,23 @@
-<form method="POST">
+<h1 class="title is-6 is-mega-menu-title">Connection</h1>
+
+<?php if($error) { foreach($errors as $e) { ?>
+    <article class="message is-danger">
+        <div class="message-header">
+            <p>Erreur</p>
+            <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+            <?php echo $e; ?>
+        </div>
+    </article>
+<?php }} ?>
+
+<form method="POST" action="/users/connection">
     <div class="field-body">
         <div class="field">
             <label class="label">Pseudo</label>
             <p class="control is-expanded has-icons-left">
-                <input name="pseudo" class="input" type="text" placeholder="Pseudo" required>
+                <input name="pseudo" class="input" type="text" placeholder="Pseudo" required value="<?php if(isset($_POST['pseudo'])) echo $_POST['pseudo']; ?>">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -23,10 +37,10 @@
     <br>
     <div class="field is-grouped is-grouped-centered">
         <p class="control">
-            <input type="submit" value="Confirmer" class="button is-primary">
+            <input type="submit" name="submit" value="Confirmer" class="button is-primary">
         </p>
         <p class="control">
-            <input type="reset" value="Annuler" class="button is-light">
+            <input id="coReset" type="reset" value="Annuler" class="button is-light">
         </p>
     </div>
 </form>
