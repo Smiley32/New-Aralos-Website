@@ -3,9 +3,18 @@
 class Guild {
     public static function getById($id) {
         $db = Db::getInstance();
-        
+
         $req = $db->prepare('SELECT * FROM guild WHERE g_id=:g_id');
         $ret = $req->execute(array('g_id' => $id));
+
+        return !$ret ? false : $req->fetch();
+    }
+
+    public static function getByUser($userId) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM guild, user_guild WHERE g_id=ug_guild AND ug_user=:ug_user');
+        $ret = $req->execute(array('ug_user' => $userId));
 
         return !$ret ? false : $req->fetch();
     }

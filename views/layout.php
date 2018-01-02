@@ -42,7 +42,38 @@
                             <a class="icon navbar-link" onclick="showLogin()"><i class="fa fa-user fa-2x"></i></a>
                             <div class="navbar-dropdown coMenu">
                                 <div class="container is-fluid">
-                                    <?php echo $coMenu; ?>
+                                    <?php if(!isConnected()) echo $coMenu; else { ?>
+                                        <div class="menu">
+                                          <p class="menu-label">
+                                            General
+                                          </p>
+                                          <ul class="menu-list">
+                                            <li><a href="/users/profil" <?php if($page == 'profil') echo 'class="is-active"'; ?>>Mon profil</a></li>
+                                            <li><a href="/users/edit" <?php if($page == 'edit') echo 'class="is-active"'; ?>>Modifier mes informations</a></li>
+                                          </ul>
+                                          <p class="menu-label">
+                                            Actions
+                                          </p>
+                                          <ul class="menu-list">
+                                            <li><a href="/users/logo" <?php if($page == 'logo') echo 'class="is-active"'; ?>>Demande de logo</a></li>
+                                            <li><a href="/users/ask" <?php if($page == 'ask') echo 'class="is-active"'; ?>>Contacter un admin</a></li>
+                                          </ul>
+                                          <p class="menu-label">
+                                            Admin
+                                          </p>
+                                          <ul class="menu-list">
+                                            <li><a href="/users/admin-list" <?php if($page == 'admin-list') echo 'class="is-active"'; ?>>Utilisateurs</a></li>
+                                            <li><a href="/users/admin-logos" <?php if($page == 'admin-logos') echo 'class="is-active"'; ?>>Demandes de logo</a></li>
+                                            <li><a href="/users/admin-asks" <?php if($page == 'admin-asks') echo 'class="is-active"'; ?>>Questions</a></li>
+                                          </ul>
+                                          <p class="menu-label">
+                                            Autres
+                                          </p>
+                                          <ul class="menu-list">
+                                              <li><a href="/users/deconnection">Deconnection</a><li>
+                                          </ul>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

@@ -5,7 +5,7 @@ class Route {
     private $_action;
 
     private $_controllers = array('pages' => ['home', 'error'],
-                                  'users' => ['connection', 'inscription', 'deconnection', 'menu', 'profil'],
+                                  'users' => ['connection', 'inscription', 'deconnection', 'edit', 'profil'],
                                   'monsters' => ['add', 'ajax']);
 
     private $_page;
@@ -56,9 +56,10 @@ class Route {
                 $r->call();
                 $coMenu = $r->getBody();
             } else {
-                $r = new Route('users', 'menu');
-                $r->call();
-                $coMenu = $r->getBody();
+                $page = '';
+                if($this->_controller == 'users') {
+                    $page = $this->_action;
+                }
             }
 
             require_once('views/layout.php');

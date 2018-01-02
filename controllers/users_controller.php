@@ -1,21 +1,14 @@
 <?php
 
 class UsersController extends Controller {
-    protected function profil() {
-        $this->title = 'Mon profil';
-
-        
+    protected function edit() {
+        $this->title = 'Modifier mes infos';
 
         require_once('views/users/' . $this->_action . '.php');
     }
 
-    protected function menu() {
-        if(!isConnected()) {
-            $_SESSION['message'] = 'Vous n\'êtes pas connecté';
-            $_SESSION['messageType'] = 'error';
-
-            redirect('pages', 'home');
-        }
+    protected function profil() {
+        $this->title = 'Mon profil';
 
         require_once('views/users/' . $this->_action . '.php');
     }
@@ -30,6 +23,8 @@ class UsersController extends Controller {
 
         unset($_SESSION['id']);
         unset($_SESSION['pseudo']);
+        unset($_SESSION['mail']);
+        unset($_SESSION['guild']);
 
         $_SESSION['message'] = 'Vous vous êtes correctement déconnecté';
         $_SESSION['messageType'] = 'success';
@@ -79,6 +74,16 @@ class UsersController extends Controller {
                     if(password_verify($_POST['pass'], $user['u_hash'])) {
                         $_SESSION['id'] = $user['u_id'];
                         $_SESSION['pseudo'] = $user['u_pseudo'];
+                        $_SESSION['mail'] = $user['u_mail'];
+
+                        // On regarde si il est dans une guilde
+                        require_once('models/guild.php');
+                        $guild = Guild::getByUser($user['u_id']);
+                        if(isset($guild['g_name'])) {
+                            $_SESSION['guild'] = $guild['g_name'];
+                        } else {
+                            $_SESSION['guild'] = false;
+                        }
 
                         // Redirection vers l'accueil
                         $_SESSION['message'] = 'Vous êtes maintenant connecté !';

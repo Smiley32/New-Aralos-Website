@@ -55,3 +55,14 @@ CREATE TABLE user_guild (
     FOREIGN KEY (ug_user) REFERENCES users(u_id),
     FOREIGN KEY (ug_guild) REFERENCES guild(g_id)
 );
+
+CREATE TABLE logos (
+    logo_id INT NOT NULL AUTO_INCREMENT,
+    logo_user INT NOT NULL,
+    logo_monster INT,
+    logo_img INT NOT NULL,
+    PRIMARY KEY (logo_id),
+    FOREIGN KEY (logo_user) REFERENCES users(u_id),
+    FOREIGN KEY (logo_monster) REFERENCES monsters(m_id),
+    FOREIGN KEY (logo_img) REFERENCES images(img_id)
+);
