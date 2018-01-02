@@ -5,7 +5,7 @@ class Route {
     private $_action;
 
     private $_controllers = array('pages' => ['home', 'error'],
-                                  'users' => ['connection', 'inscription', 'deconnection', 'menu'],
+                                  'users' => ['connection', 'inscription', 'deconnection', 'menu', 'profil'],
                                   'monsters' => ['add', 'ajax']);
 
     private $_page;

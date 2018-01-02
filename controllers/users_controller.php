@@ -1,6 +1,14 @@
 <?php
 
 class UsersController extends Controller {
+    protected function profil() {
+        $this->title = 'Mon profil';
+
+        
+
+        require_once('views/users/' . $this->_action . '.php');
+    }
+
     protected function menu() {
         if(!isConnected()) {
             $_SESSION['message'] = 'Vous n\'êtes pas connecté';

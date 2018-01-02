@@ -12,3 +12,12 @@
     margin-left: 0;
     width: auto;
 }
+
+.image.is-256x256 {
+    height: 256px;
+    width: 256px;
+}
+
+.is-centered {
+    justify-content: center;
+}
