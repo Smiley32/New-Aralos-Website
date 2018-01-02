@@ -7,6 +7,7 @@ CREATE TABLE types (
 CREATE TABLE families (
     fa_id INT NOT NULL AUTO_INCREMENT,
     fa_name VARCHAR(30) NOT NULL,
+    fa_stars INT NOT NULL,
     PRIMARY KEY (fa_id)
 );
 

@@ -83,7 +83,24 @@ class MonstersController extends Controller {
 
                                 // On regarde si la famille existe
                                 $fam = Families::getByName($_POST['familyName']);
-                                $familyId = isset($fam['fa_id']) ? $fam['fa_id'] : Families::add($_POST['familyName']);
+
+                                if(isset($fam['fa_stars']) && $fam['fa_stars'] % 10 == 0) {
+                                    $oldStars = $fam['fa_stars'];
+                                    $newStars = $_POST['stars'] * 10;
+
+                                    if($oldStars > $newStars) {
+                                        $newStars += 5;
+                                    } elseif($newStars > $oldStars) {
+                                        $newStars = $oldStars + 5;
+                                    }
+
+                                    if(!Families::updateStars($fam['fa_id'], $newStars / 10.0)) {
+                                        $error = true;
+                                        $errors[] = "La famille n'a pas été mise à jour correctement";
+                                    }
+                                }
+
+                                $familyId = isset($fam['fa_id']) ? $fam['fa_id'] : Families::add($_POST['familyName'], $_POST['stars']);
                             }
 
                             if($familyId == false) {
