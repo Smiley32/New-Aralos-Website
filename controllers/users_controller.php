@@ -42,7 +42,7 @@ class UsersController extends Controller {
 
         $error = false;
 
-        if(isset($_POST['submit'])) {
+        if(isset($_POST['coSubmit'])) {
             if(strlen($_POST['pseudo']) > 30) {
                 $error = true;
                 $errors[] = "Le pseudo est trop long";
@@ -162,6 +162,7 @@ class UsersController extends Controller {
                     $errors[] = "Impossible de créer l'utilisateur";
                 } else {
                     $succes = true;
+
                     $post = false;
                     if($isInGuild !== false) {
                         // Ajout de l'utilisateur à user_guild
@@ -173,6 +174,14 @@ class UsersController extends Controller {
                     }
                 }
             }
+        }
+
+        if($succes) {
+            // On redirige vers la page de connection
+            $_SESSION['message'] = 'Vous êtes désormais inscrits, vous pouvez dès à présent vous connecter';
+            $_SESSION['messageType'] = 'success';
+
+            redirect('pages', 'home');
         }
 
         require_once('views/users/' . $this->_action . '.php');

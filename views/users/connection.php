@@ -34,13 +34,15 @@
             </p>
         </div>
     </div>
-    <br>
+    <br />
     <div class="field is-grouped is-grouped-centered">
         <p class="control">
-            <input type="submit" name="submit" value="Confirmer" class="button is-primary">
+            <input type="submit" name="coSubmit" value="Confirmer" class="button is-primary">
         </p>
         <p class="control">
             <input id="coReset" type="reset" value="Annuler" class="button is-light">
         </p>
     </div>
 </form>
+
+<a href="/users/inscription">Je ne suis pas inscrit</a>

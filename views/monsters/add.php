@@ -79,7 +79,7 @@
     </div>
 
     <div class="field">
-        <label class="label">Choisir une famille (elle sera créée si elle n'exsite pas)</label>
+        <label class="label">Choisir une famille (elle sera créée si elle n'existe pas)</label>
         <p class="control is-expanded has-icons-left">
             <input id="toChange" autocomplete="off" name="familyName" class="input" type="text" oninput="searchFamily(this)" placeholder="Amazones" value="<?php if($post) echo $_POST['familyName']; ?>">
             <span class="icon is-small is-left">

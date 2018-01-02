@@ -56,7 +56,7 @@
     <div class="field">
         <label class="label">Mail</label>
         <p class="control is-expanded has-icons-left">
-            <input name="mail" class="input" type="mail" placeholder="mail" required value="<?php if($post && $mail !== NULL) echo $mail; ?>">
+            <input name="mail" class="input" type="mail" placeholder="mail" value="<?php if($post && $mail !== NULL) echo $mail; ?>">
             <span class="icon is-small is-left">
                 <i class="fa fa-envelope"></i>
             </span>

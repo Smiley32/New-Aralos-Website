@@ -53,7 +53,7 @@
             <?php if(isset($_SESSION['message'])) { ?>
                 <article class="message is-<?php echo $_SESSION['messageType'] == 'error' ? 'danger' : 'success'; ?>">
                     <div class="message-header">
-                        <p><?php echo $_SESSION['messageType'] == 'error' ? 'Erreur' : 'Succes'; ?></p>
+                        <p><?php echo $_SESSION['messageType'] == 'error' ? 'Erreur' : 'Succès'; ?></p>
                         <button class="delete" aria-label="delete"></button>
                     </div>
                     <div class="message-body">
