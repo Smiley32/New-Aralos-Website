@@ -13,7 +13,7 @@
 <?php if($succes) { ?>
     <article class="message is-success">
         <div class="message-header">
-            <p>Success</p>
+            <p>Succès</p>
             <button class="delete" aria-label="delete"></button>
         </div>
         <div class="message-body">

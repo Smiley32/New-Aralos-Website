@@ -78,7 +78,7 @@ CREATE TABLE compos (
     comp_id INT NOT NULL AUTO_INCREMENT,
     comp_leader INT NOT NULL,
     comp_shortDesc VARCHAR(500),
-    comp_desc INT NOT NULL,
+    comp_desc INT,
     comp_cat INT NOT NULL,
     PRIMARY KEY (comp_id),
     FOREIGN KEY (comp_leader) REFERENCES monsters(m_id),
@@ -86,9 +86,10 @@ CREATE TABLE compos (
 );
 
 CREATE TABLE compos_monsters (
+    cm_id INT NOT NULL AUTO_INCREMENT,
     cm_compo INT NOT NULL,
     cm_monster INT NOT NULL,
-    PRIMARY KEY (cm_compo),
+    PRIMARY KEY (cm_id),
     FOREIGN KEY (cm_compo) REFERENCES compos(comp_id),
     FOREIGN KEY (cm_monster) REFERENCES monsters(m_id)
 );

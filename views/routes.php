@@ -7,7 +7,7 @@ class Route {
     private $_controllers = array('pages' => ['home', 'error'],
                                   'users' => ['connection', 'inscription', 'deconnection', 'edit', 'profil'],
                                   'monsters' => ['add', 'ajax', 'list', 'ajaxlist'],
-                                  'compos' => ['add', 'ajaxGetMonster', 'ajaxAddMonster']);
+                                  'compos' => ['add', 'ajaxGetMonster', 'ajaxAddMonster', 'ajaxGetCategorie']);
 
     private $_page;
 
