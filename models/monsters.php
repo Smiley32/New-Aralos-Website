@@ -3,7 +3,7 @@
 class Monsters {
     public static function getById($id) {
         $db = Db::getInstance();
-        
+
         $req = $db->prepare('SELECT * FROM monsters WHERE m_id=:m_id');
         $ret = $req->execute(array('m_id' => $id));
 
@@ -12,11 +12,20 @@ class Monsters {
 
     public static function getByName($name) {
         $db = Db::getInstance();
-        
+
         $req = $db->prepare('SELECT * FROM monsters WHERE m_name=:m_name');
         $ret = $req->execute(array('m_name' => $name));
 
         return !$ret ? false : $req->fetch();
+    }
+
+    public static function getByFamily($famId) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM monsters,images WHERE m_img=img_id AND m_family=:m_family ORDER BY m_type ASC');
+        $ret = $req->execute(array('m_family' => $famId));
+
+        return !$ret ? false : $req->fetchAll();
     }
 
     public static function add($name, $stars, $shortDesc, $imgPath, $familyId, $typeId, $englishName = NULL) {
@@ -58,7 +67,7 @@ class Monsters {
                                     'm_img' => $imgId,
                                     'm_family' => $familyId,
                                     'm_type' => $typeId));
-        
+
         return $ret;
     }
 }

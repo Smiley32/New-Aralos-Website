@@ -61,6 +61,22 @@ class Families {
         return !$ret ? false : $req->fetchAll();
     }
 
+    /// Recherche les familles via leur noms ou bien les monstres qui sont dedans. $page est le numéro de page à récupérer
+    public static function searchByNameAndMonster($search, $page) {
+        $db = Db::getInstance();
+
+        $page -= 1;
+        $nbMaxResults = 10;
+        $min = $page * $nbMaxResults;
+
+        $search = "%$search%";
+
+        $req = $db->prepare('SELECT DISTINCT fa_id, fa_name, fa_stars FROM families, monsters WHERE fa_id=m_family AND (fa_name LIKE :search OR m_name LIKE :search) LIMIT ' . $min . ',' . $nbMaxResults);
+        $ret = $req->execute(array('search' => $search));
+
+        return !$ret ? false : $req->fetchAll();
+    }
+
     public static function getAll() {
         $db = Db::getInstance();
 

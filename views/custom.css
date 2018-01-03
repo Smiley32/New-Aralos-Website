@@ -21,3 +21,14 @@
 .is-centered {
     justify-content: center;
 }
+
+.ligneMonstre {
+    background-color: #f2f2f2;
+}
+
+.card-footer-content {
+    margin: 5px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}

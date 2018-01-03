@@ -1,6 +1,52 @@
 <?php
 
 class MonstersController extends Controller {
+    protected function ajaxlist() {
+        $this->type = 'plain';
+
+        $page = 1;
+        if(isset($_GET['page'])) {
+            if(is_numeric($_GET['page']) && $_GET['page'] > 0) {
+                $page = $_GET['page'];
+            }
+        }
+
+        $search = '%';
+        if(isset($_GET['search'])) {
+            $search = $_GET['search'];
+        }
+
+        // Récupération des familles
+        require_once('models/families.php');
+        $families = Families::searchByNameAndMonster($search, $page);
+
+        if($families == false) {
+            return;
+        }
+
+        $monsters = array();
+
+        require_once('models/monsters.php');
+        foreach($families as $f) {
+            $monsters[$f['fa_id']] = Monsters::getByFamily($f['fa_id']);
+        }
+
+        require_once('views/monsters/' . $this->_action . '.php');
+    }
+
+    protected function list() {
+        $this->title = 'Liste des monstres';
+
+        $page = 1;
+        if(isset($_GET['page'])) {
+            if(is_numeric($_GET['page']) && $_GET['page'] > 0) {
+                $page = $_GET['page'];
+            }
+        }
+
+        require_once('views/monsters/' . $this->_action . '.php');
+    }
+
     protected function ajax() {
         $this->type = 'plain';
         if(isset($_GET['search'])) {

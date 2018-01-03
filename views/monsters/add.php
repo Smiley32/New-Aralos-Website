@@ -156,7 +156,6 @@ function searchFamily(element) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if(xhttp.readyState == 4 && (xhttp.status == 200 || xhttp.status == 0)) {
-                console.log("reçu : " + xhttp.responseText);
                 document.getElementById("dropdown").innerHTML = xhttp.responseText;
                 document.getElementById("dropdown").style.display = "block";
             }
