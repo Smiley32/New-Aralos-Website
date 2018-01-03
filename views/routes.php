@@ -6,7 +6,8 @@ class Route {
 
     private $_controllers = array('pages' => ['home', 'error'],
                                   'users' => ['connection', 'inscription', 'deconnection', 'edit', 'profil'],
-                                  'monsters' => ['add', 'ajax', 'list', 'ajaxlist']);
+                                  'monsters' => ['add', 'ajax', 'list', 'ajaxlist'],
+                                  'compos' => ['add', 'ajaxGetMonster', 'ajaxAddMonster']);
 
     private $_page;
 
@@ -34,6 +35,13 @@ class Route {
                 break;
             case 'monsters':
                 $this->_page = new MonstersController($this->_action);
+                break;
+            case 'compos':
+                $this->_page = new ComposController($this->_action);
+                break;
+            default:
+                require_once('controllers/pages_controller.php');
+                $this->_page = new PagesController('error');
                 break;
         }
 

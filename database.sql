@@ -67,3 +67,28 @@ CREATE TABLE logos (
     FOREIGN KEY (logo_monster) REFERENCES monsters(m_id),
     FOREIGN KEY (logo_img) REFERENCES images(img_id)
 );
+
+CREATE TABLE categories (
+    cat_id INT NOT NULL AUTO_INCREMENT,
+    cat_label VARCHAR(30) NOT NULL,
+    PRIMARY KEY (cat_id)
+);
+
+CREATE TABLE compos (
+    comp_id INT NOT NULL AUTO_INCREMENT,
+    comp_leader INT NOT NULL,
+    comp_shortDesc VARCHAR(500),
+    comp_desc INT NOT NULL,
+    comp_cat INT NOT NULL,
+    PRIMARY KEY (comp_id),
+    FOREIGN KEY (comp_leader) REFERENCES monsters(m_id),
+    FOREIGN KEY (comp_cat) REFERENCES categories(cat_id)
+);
+
+CREATE TABLE compos_monsters (
+    cm_compo INT NOT NULL,
+    cm_monster INT NOT NULL,
+    PRIMARY KEY (cm_compo),
+    FOREIGN KEY (cm_compo) REFERENCES compos(comp_id),
+    FOREIGN KEY (cm_monster) REFERENCES monsters(m_id)
+);

@@ -1,6 +1,17 @@
 <?php
 
 class Monsters {
+    public static function getLikeName($name) {
+        $db = Db::getInstance();
+
+        $name = "%$name%";
+
+        $req = $db->prepare('SELECT * FROM monsters WHERE m_name LIKE :m_name');
+        $ret = $req->execute(array('m_name' => $name));
+
+        return !$ret ? false : $req->fetchAll();
+    }
+
     public static function getById($id) {
         $db = Db::getInstance();
 
@@ -13,7 +24,7 @@ class Monsters {
     public static function getByName($name) {
         $db = Db::getInstance();
 
-        $req = $db->prepare('SELECT * FROM monsters WHERE m_name=:m_name');
+        $req = $db->prepare('SELECT * FROM monsters,images WHERE m_img=img_id AND m_name=:m_name');
         $ret = $req->execute(array('m_name' => $name));
 
         return !$ret ? false : $req->fetch();
