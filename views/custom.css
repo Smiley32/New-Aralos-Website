@@ -20,6 +20,7 @@
 
 .is-centered {
     justify-content: center;
+    align-items: center;
 }
 
 .ligneMonstre {
@@ -31,4 +32,15 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+}
+
+.input-centered {
+    margin: auto;
+}
+
+#a-centered {
+    display: block;
+    margin: auto;
+    max-width: 200px;
+    margin-bottom: 1rem;
 }

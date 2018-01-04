@@ -93,3 +93,58 @@ CREATE TABLE compos_monsters (
     FOREIGN KEY (cm_compo) REFERENCES compos(comp_id),
     FOREIGN KEY (cm_monster) REFERENCES monsters(m_id)
 );
+
+CREATE TABLE runages (
+    ru_id INT NOT NULL AUTO_INCREMENT,
+    ru_txt TEXT NOT NULL,
+    PRIMARY KEY (ru_id)
+);
+
+CREATE TABLE sets (
+    set_id INT NOT NULL AUTO_INCREMENT,
+    set_name VARCHAR(30) NOT NULL,
+    set_size INT NOT NULL,
+    PRIMARY KEY (set_id)
+);
+
+CREATE TABLE sets_runages (
+    sr_runage INT NOT NULL,
+    sr_set INT NOT NULL,
+    PRIMARY KEY (sr_runage, sr_set),
+    FOREIGN KEY (sr_runage) REFERENCES runages(ru_id),
+    FOREIGN KEY (sr_set) REFERENCES sets(set_id)
+);
+
+CREATE TABLE stats_list (
+    sl_id INT NOT NULL AUTO_INCREMENT,
+    sl_name VARCHAR(30) NOT NULL,
+    PRIMARY KEY (sl_id)
+);
+
+CREATE TABLE stats (
+    stat_id INT NOT NULL AUTO_INCREMENT,
+    stat_name INT NOT NULL,
+    stat_importance INT NOT NULL,
+    stat_value VARCHAR(30),
+    PRIMARY KEY (stat_id),
+    FOREIGN KEY (stat_name) REFERENCES stats_list(sl_id)
+);
+
+CREATE TABLE stats_runages (
+    sru_runage INT NOT NULL,
+    sru_stat INT NOT NULL,
+    PRIMARY KEY (sru_runage, sru_stat),
+    FOREIGN KEY (sru_runage) REFERENCES runages(ru_id),
+    FOREIGN KEY (sru_stat) REFERENCES stats(stat_id)
+);
+
+CREATE TABLE monstres_runages (
+    mr_runage INT NOT NULL,
+    mr_monstre INT NOT NULL,
+    mr_compo INT NOT NULL,
+    mr_txt TEXT NOT NULL,
+    PRIMARY KEY (mr_runage, mr_monstre, mr_compo),
+    FOREIGN KEY (mr_runage) REFERENCES runages(ru_id),
+    FOREIGN KEY (mr_monstre) REFERENCES monsters(m_id),
+    FOREIGN KEY (mr_compo) REFERENCES compos(comp_id)
+);
