@@ -21,8 +21,13 @@ function isConnected() {
 }
 
 /// Fonction de redirection
-function redirect($controller, $action) {
-    header('Location: /' . $controller . '/' . $action);
+function redirect($controller, $action, $get = NULL) {
+    if($get != NULL) {
+        header('Location: /' . $controller . '/' . $action . '?' . $get);
+    } else {
+        header('Location: /' . $controller . '/' . $action);
+    }
+
     die();
 }
 

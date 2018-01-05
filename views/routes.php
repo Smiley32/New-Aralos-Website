@@ -8,7 +8,7 @@ class Route {
                                   'users' => ['connection', 'inscription', 'deconnection', 'edit', 'profil'],
                                   'monsters' => ['add', 'ajax', 'list', 'ajaxlist'],
                                   'compos' => ['add', 'ajaxGetMonster', 'ajaxAddMonster', 'ajaxGetCategorie'],
-                                  'runages' => ['add', 'ajaxGetSet', 'ajaxSearchStat', 'ajaxAddStat']);
+                                  'runages' => ['add', 'ajaxGetSet', 'ajaxSearchStat', 'ajaxAddStat', 'connect']);
 
     private $_page;
 

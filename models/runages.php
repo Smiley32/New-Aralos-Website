@@ -12,6 +12,15 @@ class Runages {
         return !$ret ? false : $req->fetchAll();
     }
 
+    public static function getSet($name) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM sets WHERE set_name=:set_name');
+        $ret = $req->execute(array('set_name' => $name));
+
+        return !$ret ? false : $req->fetch();
+    }
+
     public static function searchStat($name) {
         $db = Db::getInstance();
 
@@ -75,6 +84,44 @@ class Runages {
                                     'stat_value' => $value));
 
         return !$ret ? false : $db->lastInsertId();
+    }
+
+    public static function addRunage($setIds, $statIds, $desc) {
+        $db = DB::getInstance();
+
+        // Ajout du runage
+        $req = $db->prepare('INSERT INTO runages (ru_txt) VALUES (:ru_txt)');
+        $ret = $req->execute(array('ru_txt' => $desc));
+
+        if($ret == false) {
+            return false;
+        }
+
+        $runageId = $db->lastInsertId();
+
+        // Ajout des sets
+        foreach($setIds as $set) {
+            $req = $db->prepare('INSERT INTO sets_runages (sr_runage, sr_set) VALUES (:sr_runage, :sr_set)');
+            $ret = $req->execute(array('sr_runage' => $runageId,
+                                        'sr_set' => $set));
+
+            if($ret == false) {
+                return false;
+            }
+        }
+
+        // Ajout des stats
+        foreach($statIds as $stat) {
+            $req = $db->prepare('INSERT INTO stats_runages (sru_runage, sru_stat) VALUES (:sru_runage, :sru_stat)');
+            $ret = $req->execute(array('sru_runage' => $runageId,
+                                        'sru_stat' => $stat));
+
+            if($ret == false) {
+                return false;
+            }
+        }
+
+        return $runageId;
     }
 }
 

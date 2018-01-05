@@ -1,13 +1,18 @@
 <h1 class="title">Ajouter un runage</h1>
 
-<form method="POST">
-    Choix du/des set(s)
-    Ajout de stats
-        - nom
-        - importance
-        - valeur (optionelle)
-    description du runage
+<?php if($error) { foreach($errors as $e) { ?>
+    <article class="message is-danger">
+        <div class="message-header">
+            <p>Erreur</p>
+            <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+            <?php echo $e; ?>
+        </div>
+    </article>
+<?php }} ?>
 
+<form method="POST">
     <label class="label">Choix des sets (0 à 3)</label>
     <div class="columns">
         <div class="field column">
@@ -74,17 +79,31 @@
 
     </div>
 
+    <div class="field">
+        <label class="label">Description du runage</label>
+        <p class="control is-expanded">
+            <textarea name="desc" class="textarea" placeholder="Écrivez ici une description du runage"></textarea>
+        </p>
+    </div>
+
     <div class="field is-grouped is-grouped-centered">
         <p class="control">
             <input name="submit" type="submit" value="Confirmer" class="button is-primary">
         </p>
         <p class="control">
-            <input type="reset" value="Annuler" class="button is-light">
+            <input type="reset" value="Annuler" class="button is-light" onclick="resetStats()">
         </p>
     </div>
 </form>
 
 <script>
+
+var nbStats = 0;
+
+function resetStats() {
+    document.getElementById("stats").innerHTML = "";
+    nbStats = 0;
+}
 
 function changeStat(txt) {
     document.getElementById("changeStat").value = txt;
@@ -110,8 +129,6 @@ function searchStat() {
     }
 }
 
-var nbStats = 0;
-
 function addStat(nb) {
     var stat = document.getElementById("changeStat").value;
     var importance = document.getElementById("importance").value;
@@ -125,7 +142,7 @@ function addStat(nb) {
             if(xhttp.readyState == 4 && (xhttp.status == 200 || xhttp.status == 0)) {
                 if(xhttp.responseText) {
                     document.getElementById("stats").innerHTML += xhttp.responseText;
-                    nb++;
+                    nbStats++;
                 }
             }
         };

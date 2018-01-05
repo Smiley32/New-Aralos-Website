@@ -4,7 +4,66 @@ class RunagesController extends Controller {
     protected function add() {
         $this->title = 'Ajouter un runage';
 
+        $error = false;
+        if(isset($_POST['submit'])) {
+            $sets = array();
+            require_once('models/runages.php');
+
+            for($nb = 1; $nb <= 3; $nb++) {
+                if(isset($_POST['set' . $nb])) {
+                    if(strlen($_POST['set' . $nb]) > 0) {
+                        // On recherche le set dans la bdd
+                        $s = Runages::getSet($_POST['set' . $nb]);
+                        if(isset($s['set_id'])) {
+                            $sets[] = $s['set_id'];
+                        } else {
+                            $error = true;
+                            $errors[] = 'Impossible de trouver le set n°' . $nb . 'choisi';
+                        }
+                    }
+                }
+            }
+
+            $stats = array();
+            $nbStats = 0;
+            while(isset($_POST['stat' . $nbStats])) {
+                $stats[] = $_POST['stat' . $nbStats];
+                $nbStats++;
+            }
+
+            if($nbStats == 0) {
+                $error = true;
+                $errors[] = 'Il faut choisir au moins une stat à privilégier';
+            }
+
+            if(!isset($_POST['desc']) || strlen($_POST['desc']) == 0) {
+                $error = true;
+                $errors[] = 'Il faut entrer une description';
+            }
+
+            if(!$error) {
+                // On va entrer le runage dans la bdd
+                $runageId = Runages::addRunage($sets, $stats, $_POST['desc']);
+
+                if($runageId === false) {
+                    $error = true;
+                    $errors[] = "Une erreur est survenue lors de l'ajout du runage";
+                } else {
+                    // Redirection
+                    $_SESSION['message'] = 'Vous avez bien ajouté un runage';
+                    $_SESSION['messageType'] = 'success';
+
+                    redirect('runages', 'connect', 'id=' . $runageId);
+                }
+            }
+        }
+
         require_once('views/runages/' . $this->_action . '.php');
+    }
+
+    /// Cette page va demander à l'utilisateur de connecter le runage à un monstre et une compo
+    protected function connect() {
+        $this->title = "Connecter le runage";
     }
 
     protected function ajaxGetSet() {

@@ -1,3 +1,5 @@
+<h1 class="title">Ajouter une compo</h1>
+
 <?php if($error) { foreach($errors as $e) { ?>
     <article class="message is-danger">
         <div class="message-header">
@@ -21,8 +23,6 @@
         </div>
     </article>
 <?php } ?>
-
-<h1 class="title">Ajouter une compo</h1>
 
 <div id="monsters" class=columns>
 
