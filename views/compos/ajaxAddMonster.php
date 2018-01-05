@@ -1,4 +1,4 @@
-<div class="column" style="max-width: 15rem;">
+<div class="column input-centered" style="max-width: 15rem;">
     <div class="card">
         <div class="card-image">
             <figure class="image">

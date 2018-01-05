@@ -1,6 +1,24 @@
 <?php
 
 class Compos {
+    public static function searchByMonsterName($name) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM compos_monsters, categories, monsters, compos WHERE comp_cat=cat_id AND cm_compo=comp_id AND cm_monster=m_id AND m_name=:m_name');
+        $ret = $req->execute(array('m_name' => $name));
+
+        return !$ret ? false : $req->fetchAll();
+    }
+
+    public static function getMonsters($compoId) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM compos_monsters, monsters WHERE cm_monster=m_id AND cm_compo=:cm_compo');
+        $ret = $req->execute(array('cm_compo' => $compoId));
+
+        return !$ret ? false : $req->fetchAll();
+    }
+
     public static function add($monsters, $categorie, $shortDesc) {
         $db = Db::getInstance();
 

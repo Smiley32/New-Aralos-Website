@@ -64,6 +64,35 @@ class RunagesController extends Controller {
     /// Cette page va demander à l'utilisateur de connecter le runage à un monstre et une compo
     protected function connect() {
         $this->title = "Connecter le runage";
+
+        $error = false;
+
+        if(!isset($_GET['id'])) {
+            $id = 1;
+        } else {
+            $id = $_GET['id'];
+        }
+
+        // Récupération du runage (son texte)
+        require_once('models/runages.php');
+        $runage = Runages::getRunage($id);
+
+        if(!isset($runage['ru_id'])) {
+            $error = true;
+            $errors = "Le runage choisi n'est pas valide";
+        } else {
+            // Récupération des sets
+            $sets = Runages::getSets($id);
+
+            // Récupération des stats
+            $stats = Runages::getStats($id);
+
+            $importances[1] = 'Utile';
+            $importances[2] = 'Important';
+            $importances[3] = 'Essentiel';
+        }
+
+        require_once('views/runages/' . $this->_action . '.php');
     }
 
     protected function ajaxGetSet() {

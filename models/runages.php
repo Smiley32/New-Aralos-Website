@@ -21,6 +21,15 @@ class Runages {
         return !$ret ? false : $req->fetch();
     }
 
+    public static function getSets($runageId) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM sets_runages, sets WHERE sr_set=set_id AND sr_runage=:sr_runage');
+        $ret = $req->execute(array('sr_runage' => $runageId));
+
+        return !$ret ? false : $req->fetchAll();
+    }
+
     public static function searchStat($name) {
         $db = Db::getInstance();
 
@@ -68,6 +77,15 @@ class Runages {
         return !$ret ? false : $req->fetch();
     }
 
+    public static function getStats($runageId) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM stats_runages, stats, stats_list WHERE sru_stat=stat_id AND stat_name=sl_id AND sru_runage=:sru_runage');
+        $ret = $req->execute(array('sru_runage' => $runageId));
+
+        return !$ret ? false : $req->fetchAll();
+    }
+
     public static function addStat($smallStatId, $importance, $value) {
         $db = Db::getInstance();
 
@@ -84,6 +102,15 @@ class Runages {
                                     'stat_value' => $value));
 
         return !$ret ? false : $db->lastInsertId();
+    }
+
+    public static function getRunage($id) {
+        $db = Db::getInstance();
+
+        $req = $db->prepare('SELECT * FROM runages WHERE ru_id=:ru_id');
+        $ret = $req->execute(array('ru_id' => $id));
+
+        return !$ret ? false : $req->fetch();
     }
 
     public static function addRunage($setIds, $statIds, $desc) {

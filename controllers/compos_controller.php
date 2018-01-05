@@ -80,6 +80,26 @@ class ComposController extends Controller {
         }
     }
 
+    protected function ajaxSearchCompos() {
+        $this->type = 'plain';
+
+        if(isset($_GET['monster'])) {
+            // Recherche des compos qui contiennent ce monstre
+            require_once('models/compos.php');
+            $compos = Compos::searchByMonsterName($_GET['monster']);
+
+            if($compos == false) {
+                return;
+            }
+
+            foreach($compos as $key => $compo) {
+                $compos[$key]['monsters'] = Compos::getMonsters($compo['comp_id']);
+            }
+
+            require_once('views/compos/' . $this->_action . '.php');
+        }
+    }
+
     protected function ajaxAddMonster() {
         $this->type = 'plain';
         if(isset($_GET['name'])) {
