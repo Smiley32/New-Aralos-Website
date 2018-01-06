@@ -1,6 +1,12 @@
 <?php
 
 class MonstersController extends Controller {
+    protected function description() {
+        $this->title = "Monstre...";
+
+        require_once('views/monsters/' . $this->_action . '.php');
+    }
+
     protected function ajaxlist() {
         $this->type = 'plain';
 
