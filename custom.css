@@ -1,0 +1,58 @@
+.dropdown-item:hover {
+    background-color: #f2f2f2;
+}
+
+.coMenu {
+    margin-left: -22rem;
+    width: 30rem;
+    padding: 1rem;
+}
+
+.is-active .coMenu {
+    margin-left: 0;
+    width: auto;
+}
+
+.image.is-256x256 {
+    height: 256px;
+    width: 256px;
+}
+
+.is-centered {
+    justify-content: center;
+    align-items: center;
+}
+
+.ligneMonstre {
+    background-color: #f2f2f2;
+}
+
+.card-footer-content {
+    margin: 5px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-centered {
+    margin: auto;
+}
+
+#a-centered {
+    display: block;
+    margin: auto;
+    max-width: 200px;
+    margin-bottom: 1rem;
+}
+body {
+    background-image:url(../images/fond/888709.jpg);
+/*  background-attachment:fixed;*/
+    opacity: 1;
+}
+
+.presentationAralos {
+
+    color: black;
+    margin: auto;
+
+}
