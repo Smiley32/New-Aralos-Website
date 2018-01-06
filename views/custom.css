@@ -44,3 +44,15 @@
     max-width: 200px;
     margin-bottom: 1rem;
 }
+body {
+    background-image:url(/images/fond/888709.jpg);
+/*  background-attachment:fixed;*/
+    opacity: 1;
+}
+
+.presentationAralos {
+
+    color: black;
+    margin: auto;
+
+}
