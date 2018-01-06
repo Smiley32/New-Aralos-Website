@@ -5,7 +5,7 @@
         <?php } ?>
         <hr />
         <?php foreach($stats as $stat) { ?>
-            <div class="card">
+            <div class="card" style="display:inline-block;">
                 <div class="card-content">
                     <?php echo $stat['sl_name'] ?>
                     <hr />

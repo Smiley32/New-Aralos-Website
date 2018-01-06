@@ -92,6 +92,52 @@ class RunagesController extends Controller {
             $importances[3] = 'Essentiel';
         }
 
+        if(isset($_POST['submit'])) {
+            if(!isset($_GET['id'])) {
+                $error = true;
+                $errors[] = "Aucun runage n'a été choisi";
+            } else {
+                $runageId = $_GET['id'];
+            }
+
+            if(!isset($_POST['monster']) || strlen($_POST['monster']) == 0) {
+                $error = true;
+                $errors[] = "Aucun monstre n'a été choisi";
+            } else {
+                $monsterName = $_POST['monster'];
+            }
+
+            if(!isset($_POST['compo']) || strlen($_POST['compo']) == 0) {
+                $error = true;
+                $errors[] = "Aucune compo n'a été choisie";
+            } else {
+                $compoId = $_POST['compo'];
+            }
+
+            if(!isset($_POST['desc']) || strlen($_POST['desc']) == 0) {
+                $error = true;
+                $errors[] = "Aucune description n'a été entrée";
+            } else {
+                $desc = $_POST['desc'];
+            }
+
+            if(!$error) {
+                // Ajout à la bdd
+                require_once('models/runages.php');
+                $ret = Runages::connect($runageId, $monsterName, $compoId, $desc);
+
+                if($ret) {
+                    $_SESSION['message'] = 'Le runage a bien été associé à un monstre et une comp';
+                    $_SESSION['messageType'] = 'success';
+                    redirect('pages', 'home');
+                } else {
+                    $error = true;
+                    $errors[] = "Une erreur est survenue";
+                }
+            }
+
+        }
+
         require_once('views/runages/' . $this->_action . '.php');
     }
 

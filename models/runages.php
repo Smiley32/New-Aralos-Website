@@ -113,6 +113,26 @@ class Runages {
         return !$ret ? false : $req->fetch();
     }
 
+    public static function connect($runageId, $monsterName, $compoId, $desc) {
+        $db = Db::getInstance();
+
+        // Récupération de l'id du monstre
+        require_once('models/monsters.php');
+        $monster = Monsters::getByName($monsterName);
+
+        if(!isset($monster['m_id'])) {
+            return false;
+        }
+
+        $req = $db->prepare('INSERT INTO monstres_runages (mr_runage, mr_monstre, mr_compo, mr_txt) VALUES (:mr_runage, :mr_monstre, :mr_compo, :mr_txt)');
+        $ret = $req->execute(array('mr_runage' => $runageId,
+                                    'mr_monstre' => $monster['m_id'],
+                                    'mr_compo' => $compoId,
+                                    'mr_txt' => $desc));
+
+        return $ret;
+    }
+
     public static function addRunage($setIds, $statIds, $desc) {
         $db = DB::getInstance();
 

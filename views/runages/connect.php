@@ -4,12 +4,12 @@
     <div class="column input-centered" style="max-width:30rem;">
         <?php if(!$error) require_once('views/runages/ajaxGetRunage.php'); ?>
     </div>
-    <div id="monsters">
+    <div id="monsters" class="input-centered">
 
     </div>
 </div>
 
-<form method="POST" action="/compos/add">
+<form method="POST" action="/runages/connect?id=<?php echo $_GET['id']; ?>">
 
     <input type="text" name="monster" id="hiddenMonster" hidden />
 
