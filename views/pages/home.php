@@ -1,22 +1,16 @@
-<section class="hero is-light">
+<section class="hero">
   <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        Bienvenue sur le site de la guilde Aralos !
-      </h1>
-      <h2 class="subtitle">
-        Présentation de Aralos
-      </h2>
-        <p class="presentationAralos">Que dire d'Aralos ? <br> Aralos est une guilde qui a été fondée en 2014 par Smiley32 notre chef de guilde.
-          Depuis la guilde n'a cessé d'évoluer au fil des années. Des membres sont partis et sont revenus, la guilde <br>à parfois des hauts et des bas
-          mais nous le savons tous, la guilde atteindra le sommet un jour, pour l'instant la guilde finit G1 constamment en GVG et est aussi classée G1 en GWO.
-          Pour le moment la guilde ne compte que 23 membres, suite à des départs non prévu ! Mais nous le savons, nous allons remonter et recruter de nouveaux membres !
+      <h1 class="title">Bienvenue sur le site de la guilde Aralos !</h1>
+      <h2 class="subtitle">Présentation de Aralos</h2>
+    Que dire d'Aralos ? <br> Aralos est une guilde qui a été fondée en 2014 par Smiley32 notre chef de guilde.
+      Depuis la guilde n'a cessé d'évoluer au fil des années. Des membres sont partis et sont revenus, la guilde <br>à parfois des hauts et des bas
+      mais nous le savons tous, la guilde atteindra le sommet un jour, pour l'instant la guilde finit G1 constamment en GVG et est aussi classée G1 en GWO.
+      Pour le moment la guilde ne compte que 23 membres, suite à des départs non prévu ! Mais nous le savons, nous allons remonter et recruter de nouveaux membres !
 
-          <br>
-          La guilde est géré par son créateur Smiley32, ArtenixBlack et enfin Gotcha28.
-        </p>
+      <br>
+      La guilde est géré par son créateur Smiley32, ArtenixBlack et enfin Gotcha28.
+
     </div>
-  </div>
 </section>
 
 <div class="tile is-ancestor">
@@ -60,16 +54,15 @@
         <article class="tile is-child notification is-dark">
           <p class="title">Logo d'Aralos</p>
           <p class="subtitle">Différents logos de membres</p>
-          <figure class="image is-4by3">
-            <img src="/images/fond/17.png">
-          </figure>
-          <figure class="image is-4by3">
+          <figure class="image">
             <img src="/images/fond/1.png">
           </figure>
-          <figure class="image is-4by3">
+          <br />
+          <figure class="image">
             <img src="/images/fond/3.png">
           </figure>
-          <figure class="image is-4by3">
+          <br />
+          <figure class="image">
             <img src="/images/fond/7.png">
           </figure>
         </article>
