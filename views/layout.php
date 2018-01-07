@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -93,7 +93,9 @@
                 </article>
             <?php unset($_SESSION['message']); } ?>
 
-            <?php echo $body; ?>
+            <div class="body-content">
+                <?php echo $body; ?>
+            </div>
         </div>
 
         <script>
