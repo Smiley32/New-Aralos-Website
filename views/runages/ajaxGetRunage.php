@@ -1,5 +1,6 @@
 <div class="card" style="max-width:30rem;">
-    <div class="card-content">
+    <!-- <div class="card-content"> -->
+        <article class="tile is-child notification is-dark">
         <?php foreach($sets as $set) { ?>
             <?php echo $set['set_name'], '<br />'; ?>
         <?php } ?>
@@ -16,5 +17,6 @@
         <?php } ?>
         <hr />
         <?php echo $runage['ru_txt']; ?>
-    </div>
+    </article>
+    <!-- </div> -->
 </div>

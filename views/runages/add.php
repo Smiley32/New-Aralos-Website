@@ -1,4 +1,13 @@
-<h1 class="title">Ajouter un runage</h1>
+<section class="hero is-black welcome is-black">
+    <div class="hero-body">
+        <h1 class="title">
+            Bonjour <?php echo $_SESSION['pseudo']; ?> !
+        </h1>
+        <h2 class="subtitle">
+            Ajoute un runage !
+        </h2>
+    </div>
+</section>
 
 <?php if($error) { foreach($errors as $e) { ?>
     <article class="message is-danger">
@@ -12,6 +21,12 @@
     </article>
 <?php }} ?>
 
+
+
+<div class="tile is-ancestor">
+
+        <div class="tile is-14 is-vertical is-parent">
+            <article class="tile is-child notification is-danger">
 <form method="POST">
     <label class="label">Choix des sets (0 à 3)</label>
     <div class="columns">
@@ -95,6 +110,8 @@
         </p>
     </div>
 </form>
+</div>
+</div>
 
 <script>
 

@@ -1,60 +1,90 @@
-<h1 class="title">Choisir le monstre et la compo</h1>
-
-<div class="columns">
-    <div class="column input-centered" style="max-width:30rem;">
-        <?php if(!$error) require_once('views/runages/ajaxGetRunage.php'); ?>
+<section class="hero is-black welcome is-black">
+    <div class="hero-body">
+        <h1 class="title">
+            Bonjour <?php echo $_SESSION['pseudo']; ?> !
+        </h1>
+        <h2 class="subtitle">
+            Choisis le monstre et la compo
+        </h2>
     </div>
-    <div id="monsters" class="input-centered">
+</section>
 
-    </div>
-</div>
 
-<form method="POST" action="/runages/connect?id=<?php echo $_GET['id']; ?>">
+<div class="tile is-ancestor">
 
-    <input type="text" name="monster" id="hiddenMonster" hidden />
+        <div class="tile is-14 is-vertical is-parent">
+            <article class="tile is-child notification is-dark">
+                <div class="tile">
+                    <!-- <div class="content"> -->
 
-    <label class="label">Choisir un monstre (il doit exister)</label>
-    <div class="field has-addons">
+                            <div class="column input-left" style="max-width:30rem;">
+                                <?php if(!$error) require_once('views/runages/ajaxGetRunage.php'); ?>
+                            </div>
+                            <div id="monsters" class="input-centered">
 
-        <p class="control is-expanded has-icons-left">
-            <input id="toChange" autocomplete="off" class="input" type="text" oninput="searchMonster(this)" placeholder="Hina">
-            <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-            </span>
-        </p>
-        <div class="control">
-            <a class="button is-info" onclick="addMonster()">Ajouter</a>
+
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </article>
+
         </div>
+
+<div class="tile is-14 is-vertical is-parent">
+    <article class="tile is-child notification is-dark">
+        <form method="POST" action="/runages/connect?id=<?php echo $_GET['id']; ?>">
+
+            <input type="text" name="monster" id="hiddenMonster" hidden />
+
+            <label class="label">Choisir un monstre (il doit exister)</label>
+            <div class="field has-addons">
+
+                <p class="control is-expanded has-icons-left">
+                    <input id="toChange" autocomplete="off" class="input" type="text" oninput="searchMonster(this)" placeholder="Hina">
+                    <span class="icon is-small is-left">
+                        <i class="fa fa-user"></i>
+                    </span>
+                </p>
+                <div class="control">
+                    <a class="button is-info" onclick="addMonster()">Ajouter</a>
+                </div>
+            </div>
+            <div class="dropdown-content" id="dropdown" style="display: none;">
+
+            </div>
+
+            <br />
+
+            <input type="text" name="compo" id="changeCompo" hidden />
+            <label class="label">Choisir une compo</label>
+            <div id="compos" class="dropdown-content">
+
+            </div>
+
+            <div class="field">
+                <label class="label">Explication du runage sur ce monstre</label>
+                <p class="control is-expanded">
+                    <textarea name="desc" class="textarea" placeholder="Écrivez ici une description"></textarea>
+                </p>
+            </div>
+
+            <br />
+            <div class="field is-grouped is-grouped-centered">
+                <p class="control">
+                    <input type="submit" name="submit" value="Confirmer" class="button is-primary">
+                </p>
+                <p class="control">
+                    <input type="reset" value="Annuler" onclick="resetPage()" class="button is-light">
+                </p>
+            </div>
+        </form>
+    </article>
     </div>
-    <div class="dropdown-content" id="dropdown" style="display: none;">
-
     </div>
 
-    <br />
 
-    <input type="text" name="compo" id="changeCompo" hidden />
-    <label class="label">Choisir une compo</label>
-    <div id="compos" class="dropdown-content">
 
-    </div>
 
-    <div class="field">
-        <label class="label">Explication du runage sur ce monstre</label>
-        <p class="control is-expanded">
-            <textarea name="desc" class="textarea" placeholder="Écrivez ici une description"></textarea>
-        </p>
-    </div>
-
-    <br />
-    <div class="field is-grouped is-grouped-centered">
-        <p class="control">
-            <input type="submit" name="submit" value="Confirmer" class="button is-primary">
-        </p>
-        <p class="control">
-            <input type="reset" value="Annuler" onclick="resetPage()" class="button is-light">
-        </p>
-    </div>
-</form>
 
 <script>
 
