@@ -1,15 +1,11 @@
-
-<div class="container">
 <section class="hero is-info welcome is-small">
 <div class="hero-body">
-<div class="container">
   <h1 class="title">
     Bonjour <?php echo $_SESSION['pseudo']; ?> !
   </h1>
   <h2 class="subtitle">
     J'espère que tu passes une bonne journée !
   </h2>
-</div>
 </div>
 </section>
 <br />
@@ -50,6 +46,5 @@
             <img src="/uploads/test.png">
         </figure>
     </div>
-</div>
 </div>
 </div>
