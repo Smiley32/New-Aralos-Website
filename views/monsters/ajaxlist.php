@@ -1,9 +1,9 @@
 <?php foreach($families as $f) { ?>
 <p class="title is-5"><?php echo $f['fa_name'] ?> - <?php for($i = 10; $i <= $f['fa_stars']; $i += 10) { ?> <i class="fa fa-star" aria-hidden="true"></i><?php } if($f['fa_stars'] % 10 != 0) { ?><i class="fa fa-star-half" aria-hidden="true"></i><?php } ?></p>
-<div class="columns ligneMonstre">
+<div class="columns ligneMonstre is-mobile" style="overflow:auto;">
     <?php $i = 0; for($nb = 1; $nb <= 5; $nb++) {
         if(isset($monsters[$f['fa_id']][$i]) && $monsters[$f['fa_id']][$i]['m_type'] == $nb) { ?>
-            <div class="column">
+            <div class="column" style="min-width:10rem;">
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">

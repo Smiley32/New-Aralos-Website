@@ -1,5 +1,15 @@
 <?php
 
+abstract class Sort {
+    const Stars = 0;
+    const Family = 1;
+}
+
+abstract class Order {
+    const Asc = 0;
+    const Desc = 1;
+}
+
 class Families {
     /// Retourne l'id de la famille ajoutée ou false
     public static function add($name, $stars) {
@@ -62,7 +72,7 @@ class Families {
     }
 
     /// Recherche les familles via leur noms ou bien les monstres qui sont dedans. $page est le numéro de page à récupérer
-    public static function searchByNameAndMonster($search, $page) {
+    public static function searchByNameAndMonster($search, $page, $sort = Sort::Family, $order = Order::Asc) {
         $db = Db::getInstance();
 
         $page -= 1;
@@ -71,7 +81,28 @@ class Families {
 
         $search = "%$search%";
 
-        $req = $db->prepare('SELECT DISTINCT fa_id, fa_name, fa_stars FROM families, monsters WHERE fa_id=m_family AND (fa_name LIKE :search OR m_name LIKE :search) LIMIT ' . $min . ',' . $nbMaxResults);
+        switch($order) {
+            case Order::Asc:
+                $orderTxt = "ASC";
+                break;
+            default:
+                $orderTxt = "DESC";
+                break;
+        }
+
+        switch($sort) {
+            case Sort::Family:
+                $orderBy = "ORDER BY fa_name $orderTxt";
+                break;
+            case Sort::Stars:
+                $orderBy = "ORDER BY fa_stars $orderTxt, fa_name $orderTxt";
+                break;
+            default:
+                $orderBy = "";
+                break;
+        }
+
+        $req = $db->prepare('SELECT DISTINCT fa_id, fa_name, fa_stars FROM families, monsters WHERE fa_id=m_family AND (fa_name LIKE :search OR m_name LIKE :search) ' . $orderBy . ' LIMIT ' . $min . ',' . $nbMaxResults);
         $ret = $req->execute(array('search' => $search));
 
         return !$ret ? false : $req->fetchAll();
