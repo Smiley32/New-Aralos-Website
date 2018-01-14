@@ -12,6 +12,9 @@
 
 <form method="POST">
     <label class="label">Ajouter une catégorie</label>
+
+    <input type="text" name="categories" id="inputCat" hidden />
+
     <div class="field has-addons">
         <p class="control is-expanded">
             <input class="input" id="catToChange" oninput="searchCategorie(this)" type="text">
@@ -49,9 +52,11 @@ function addTag() {
 
 function displayTags() {
     document.getElementById("tagList").innerHTML = "";
+    document.getElementById("inputCat").value = "";
 
     for(var i = 0; i < tags.length; i++) {
         document.getElementById("tagList").innerHTML += '<div class="control"><div class="tags has-addons"><span class="tag is-danger">' + tags[i] + '</span><a class="tag is-delete" onclick="removeTag(' + i + ')"></a></div></div>';
+        document.getElementById("inputCat").value += " " + tags[i];
     }
 }
 

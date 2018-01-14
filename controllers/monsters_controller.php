@@ -30,6 +30,12 @@ class MonstersController extends Controller {
                 $errors[] = "Il faut entrer une description";
             }
 
+            if(isset($_POST['categories']) && strlen($_POST['categories']) > 0) {
+                $catText = $_POST['categories'];
+            } else {
+                $error = true;
+                $errors[] = "Il faut entrer au moins une catégorie";
+            }
         }
 
         require_once('views/monsters/' . $this->_action . '.php');
