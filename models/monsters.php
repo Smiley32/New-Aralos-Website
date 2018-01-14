@@ -15,7 +15,7 @@ class Monsters {
     public static function getById($id) {
         $db = Db::getInstance();
 
-        $req = $db->prepare('SELECT * FROM monsters WHERE m_id=:m_id');
+        $req = $db->prepare('SELECT * FROM monsters, images WHERE m_img=img_id AND m_id=:m_id');
         $ret = $req->execute(array('m_id' => $id));
 
         return !$ret ? false : $req->fetch();

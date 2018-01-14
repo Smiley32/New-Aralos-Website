@@ -113,9 +113,9 @@ class ComposController extends Controller {
 
     protected function ajaxGetCategorie() {
         $this->type = 'plain';
-        if(isset($_GET['name'])) {
-            require_once('models/categorie.php');
-            $categories = Categorie::getLikeName($_GET['name']);
+        if(isset($_GET['search'])) {
+            require_once('models/categories.php');
+            $categories = Categories::getLikeName($_GET['search']);
             if($categories !== false) {
                 require_once('views/compos/' . $this->_action . '.php');
             }

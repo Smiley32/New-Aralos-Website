@@ -147,7 +147,7 @@ function searchCategorie(element) {
         };
 
         console.log(txt);
-        xhttp.open("GET", "/compos/ajaxGetMonster?search=" + txt, true);
+        xhttp.open("GET", "/compos/ajaxGetCategorie?search=" + txt, true);
         xhttp.send();
     }
 }

@@ -1,6 +1,40 @@
 <?php
 
 class MonstersController extends Controller {
+    protected function createDescription() {
+        if(!isset($_GET['id'])) {
+            $this->title = "Erreur";
+            echo "Aucun monstre choisi";
+            return;
+        }
+
+        $monsterId = $_GET['id'];
+        require_once('models/monsters.php');
+        $monster = Monsters::getById($monsterId);
+        if(!isset($monster['m_id'])) {
+            $this->title = "Erreur";
+            echo "Mauvais monstre choisi";
+            return;
+        }
+
+        $this->title = $monster['m_name'];
+
+        $error = false;
+        $errors = array();
+
+        if(isset($_POST['submit'])) {
+            if(isset($_POST['desc']) && strlen($_POST['desc']) > 0) {
+                $desc = $_POST['desc'];
+            } else {
+                $error = true;
+                $errors[] = "Il faut entrer une description";
+            }
+
+        }
+
+        require_once('views/monsters/' . $this->_action . '.php');
+    }
+
     protected function description() {
         $this->title = "Monstre...";
 
