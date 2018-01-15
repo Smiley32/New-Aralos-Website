@@ -87,6 +87,7 @@ function displayTags() {
     }
 }
 
+
 function removeTag(index) {
     tags.splice(index, 1);
     displayTags();
