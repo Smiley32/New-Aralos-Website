@@ -17,7 +17,7 @@
 
     <div class="field has-addons">
         <p class="control is-expanded">
-            <input class="input" id="catToChange" oninput="searchCategorie(this)" type="text">
+            <input class="input" id="catToChange" oninput="searchCategorie(this)" type="text" placeholder="Categorie">
         </p>
         <p class="control">
             <a class="button is-info" onclick="addTag()">Ajouter</a>
@@ -29,6 +29,33 @@
 
     <div id="tagList" class="field is-grouped is-grouped-multiline">
 
+    </div>
+
+    <label class="label">Ajouter des lieux d'obtention du monstre</label>
+
+    <input type="text" name="places" id="inputPlaces" hidden />
+
+    <div class="field has-addons">
+        <p class="control is-expanded">
+            <input class="input" id="placeToChange" oninput="searchPlaces(this)" type="text" placeholder="Lieu">
+        </p>
+        <p class="control">
+            <a class="button is-info" onclick="addPlace()">Ajouter</a>
+        </p>
+    </div>
+    <div class="dropdown-content" id="dropdownPlace" style="display: none;">
+
+    </div>
+
+    <div id="placeList" class="field is-grouped is-grouped-multiline">
+
+    </div>
+
+    <div class="field">
+        <label class="label">Description complète du monstre</label>
+        <p class="control is-expanded">
+            <textarea name="desc" class="textarea" placeholder="Écrivez ici une description du monstre"></textarea>
+        </p>
     </div>
 
     <div class="field is-grouped is-grouped-centered">
