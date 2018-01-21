@@ -1,6 +1,17 @@
 <?php
 
 class MonstersController extends Controller {
+    protected function ajaxGetPlace() {
+        $this->type = 'plain';
+        if(isset($_GET['search'])) {
+            require_once('models/places.php');
+            $places = Places::getLikeName($_GET['search']);
+            if($places !== false) {
+                require_once('views/monsters/' . $this->_action . '.php');
+            }
+        }
+    }
+
     protected function createDescription() {
         if(!isset($_GET['id'])) {
             $this->title = "Erreur";

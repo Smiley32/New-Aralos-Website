@@ -148,3 +148,17 @@ CREATE TABLE monstres_runages (
     FOREIGN KEY (mr_monstre) REFERENCES monsters(m_id),
     FOREIGN KEY (mr_compo) REFERENCES compos(comp_id)
 );
+
+CREATE TABLE places (
+    p_id INT NOT NULL AUTO_INCREMENT,
+    p_name VARCHAR(30) NOT NULL,
+    PRIMARY KEY (p_id)
+);
+
+CREATE TABLE monsters_places (
+    mp_monster INT NOT NULL,
+    mp_place INT NOT NULL,
+    PRIMARY KEY (mp_monster, mp_place),
+    FOREIGN KEY (mp_monster) REFERENCES monsters(m_id),
+    FOREIGN KEY (mp_place) REFERENCES places(p_id)
+);

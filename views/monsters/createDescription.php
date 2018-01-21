@@ -37,7 +37,7 @@
 
     <div class="field has-addons">
         <p class="control is-expanded">
-            <input class="input" id="placeToChange" oninput="searchPlaces(this)" type="text" placeholder="Lieu">
+            <input class="input" id="placeToChange" oninput="searchPlace(this)" type="text" placeholder="Lieu">
         </p>
         <p class="control">
             <a class="button is-info" onclick="addPlace()">Ajouter</a>
@@ -97,6 +97,30 @@ function changeCat(txt) {
     document.getElementById("catToChange").value = txt;
     document.getElementById("dropdownCat").style.display = "none";
     document.getElementById("dropdownCat").innerHTML = "";
+}
+
+function changePlace(txt) {
+    document.getElementById("placeToChange").value = txt;
+    document.getElementById("dropdownPlace").style.display = "none";
+    document.getElementById("dropdownPlace").innerHTML = "";
+}
+
+function searchPlace(element) {
+    var txt = element.value;
+    if(txt.length > 2) {
+        txt = encodeURIComponent(txt);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if(xhttp.readyState == 4 && (xhttp.status == 200 || xhttp.status == 0)) {
+                document.getElementById("dropdownPlace").innerHTML = xhttp.responseText;
+                document.getElementById("dropdownPlace").style.display = "block";
+            }
+        };
+
+        console.log(txt);
+        xhttp.open("GET", "/monsters/ajaxGetPlace?search=" + txt, true);
+        xhttp.send();
+    }
 }
 
 function searchCategorie(element) {
